@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- Declares this is an HTML5 document -->
+
+<html lang="en">
+<!-- The root element, lang="en" helps screen readers and search engines -->
+
+<head>
+    <!-- The head contains metadata (data about the page) -->
+    
+    <!-- Character encoding - UTF-8 supports all languages -->
+    <meta charset="UTF-8">
+    
+    <!-- Viewport settings for responsive design on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title shown in browser tab -->
+    <title>Personal Book Library Manager</title>
+    
+    <!-- Link to our custom CSS file for styling -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome for icons (fa-book, fa-edit, etc.) -->
+    <!-- CDN means Content Delivery Network - loads from their server -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- The body contains everything visible on the page -->
+    
+    <!-- ============================================ -->
+    <!-- HEADER SECTION -->
+    <!-- ============================================ -->
+    <header class="header">
+        <!-- Container keeps content centered and adds padding -->
+        <div class="container">
+            <!-- Main title with book icon -->
+            <h1>
+                <!-- Font Awesome icon -->
+                <i class="fas fa-book-open"></i> 
+                My Book Library
+            </h1>
+            <!-- Subtitle -->
+            <p>Manage your personal book collection</p>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- STATISTICS DASHBOARD -->
+    <!-- ============================================ -->
+    <section class="stats-section">
+        <div class="container">
+            <!-- Grid layout for statistics cards -->
+            <div class="stats-grid">
+                
+                <!-- Total Books Card -->
+                <div class="stat-card">
+                    <i class="fas fa-books"></i>
+                    <!-- This will be updated by JavaScript -->
+                    <h3 id="totalBooks">0</h3>
+                    <p>Total Books</p>
+                </div>
+                
+                <!-- Books Read Card -->
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="booksRead">0</h3>
+                    <p>Books Read</p>
+                </div>
+                
+                <!-- Currently Reading Card -->
+                <div class="stat-card">
+                    <i class="fas fa-book-reader"></i>
+                    <h3 id="booksReading">0</h3>
+                    <p>Currently Reading</p>
+                </div>
+                
+                <!-- To Read Card -->
+                <div class="stat-card">
+                    <i class="fas fa-bookmark"></i>
+                    <h3 id="booksToRead">0</h3>
+                    <p>To Read</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT AREA -->
+    <!-- ============================================ -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- ============================================ -->
+            <!-- ADD BOOK FORM SECTION -->
+            <!-- ============================================ -->
+            <section class="add-book-section">
+                <h2>Add New Book</h2>
+                
+                <!-- Form for adding new books -->
+                <!-- id="bookForm" allows JavaScript to find this form -->
+                <form id="bookForm" class="book-form">
+                    
+                    <!-- Grid container for form fields -->
+                    <div class="form-grid">
+                        
+                        <!-- Title Field (Required) -->
+                        <div class="form-group">
+                            <!-- Label is connected to input via 'for' attribute -->
+                            <label for="title">Title *</label>
+                            <!-- required attribute means form won't submit without this -->
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        
+                        <!-- Author Field (Required) -->
+                        <div class="form-group">
+                            <label for="author">Author *</label>
+                            <input type="text" id="author" name="author" required>
+                        </div>
+                        
+                        <!-- ISBN Field (Optional) -->
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" id="isbn" name="isbn">
+                        </div>
+                        
+                        <!-- Genre Field (Optional) -->
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <input type="text" id="genre" name="genre">
+                        </div>
+                        
+                        <!-- Year Published Field (Optional) -->
+                        <div class="form-group">
+                            <label for="year_published">Year Published</label>
+                            <!-- number type shows numeric keyboard on mobile -->
+                            <!-- min and max set valid range -->
+                            <input type="number" id="year_published" name="year_published" min="1000" max="2024">
+                        </div>
+                        
+                        <!-- Reading Status Dropdown -->
+                        <div class="form-group">
+                            <label for="status">Reading Status</label>
+                            <!-- Select creates a dropdown menu -->
+                            <select id="status" name="status">
+                                <option value="to-read">To Read</option>
+                                <option value="reading">Currently Reading</option>
+                                <option value="read">Already Read</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Rating Field (1-5 stars) -->
+                        <div class="form-group">
+                            <label for="rating">Rating (1-5)</label>
+                            <input type="number" id="rating" name="rating" min="1" max="5">
+                        </div>
+                        
+                        <!-- Notes Field (Text area for longer text) -->
+                        <!-- full-width class makes this span entire width -->
+                        <div class="form-group full-width">
+                            <label for="notes">Notes</label>
+                            <!-- Textarea for multi-line text input -->
+                            <textarea id="notes" name="notes" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Book
+                    </button>
+                </form>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SEARCH AND FILTER SECTION -->
+            <!-- ============================================ -->
+            <section class="search-section">
+                <!-- Search Input -->
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search books by title or author..."
+                >
+                
+                <!-- Filter Dropdown -->
+                <select id="filterStatus">
+                    <option value="">All Books</option>
+                    <option value="read">Read</option>
+                    <option value="reading">Currently Reading</option>
+                    <option value="to-read">To Read</option>
+                </select>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- BOOKS LIST SECTION -->
+            <!-- ============================================ -->
+            <section class="books-section">
+                <h2>My Books</h2>
+                
+                <!-- Container for book cards -->
+                <!-- JavaScript will populate this with book data -->
+                <div id="booksList" class="books-grid">
+                    <!-- Books will be dynamically loaded here by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- EDIT MODAL (Hidden by default) -->
+    <!-- ============================================ -->
+    <!-- Modal is a popup dialog box -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <!-- Close button (X) -->
+            <span class="close">&times;</span>
+            
+            <h2>Edit Book</h2>
+            
+            <!-- Edit form (similar to add form) -->
+            <form id="editBookForm" class="book-form">
+                <!-- Hidden field to store book ID -->
+                <input type="hidden" id="editBookId">
+                
+                <div class="form-grid">
+                    <!-- Title Field -->
+                    <div class="form-group">
+                        <label for="editTitle">Title *</label>
+                        <input type="text" id="editTitle" required>
+                    </div>
+                    
+                    <!-- Author Field -->
+                    <div class="form-group">
+                        <label for="editAuthor">Author *</label>
+                        <input type="text" id="editAuthor" required>
+                    </div>
+                    
+                    <!-- ISBN Field -->
+                    <div class="form-group">
+                        <label for="editIsbn">ISBN</label>
+                        <input type="text" id="editIsbn">
+                    </div>
+                    
+                    <!-- Genre Field -->
+                    <div class="form-group">
+                        <label for="editGenre">Genre</label>
+                        <input type="text" id="editGenre">
+                    </div>
+                    
+                    <!-- Year Field -->
+                    <div class="form-group">
+                        <label for="editYear">Year Published</label>
+                        <input type="number" id="editYear" min="1000" max="2024">
+                    </div>
+                    
+                    <!-- Status Dropdown -->
+                    <div class="form-group">
+                        <label for="editStatus">Status</label>
+                        <select id="editStatus">
+                            <option value="to-read">To Read</option>
+                            <option value="reading">Currently Reading</option>
+                            <option value="read">Already Read</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Rating Field -->
+                    <div class="form-group">
+                        <label for="editRating">Rating</label>
+                        <input type="number" id="editRating" min="1" max="5">
+                    </div>
+                    
+                    <!-- Notes Field -->
+                    <div class="form-group full-width">
+                        <label for="editNotes">Notes</label>
+                        <textarea id="editNotes" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Update Button -->
+                <button type="submit" class="btn btn-primary">Update Book</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link to our JavaScript file -->
+    <!-- Script tag at the bottom ensures HTML loads first -->
+    <script src="js/script.js"></script>
+</body>
+</html>

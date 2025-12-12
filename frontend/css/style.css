@@ -1,0 +1,490 @@
+/* ============================================ */
+/* RESET AND BASE STYLES */
+/* ============================================ */
+
+/* Universal selector - applies to ALL elements */
+* {
+    margin: 0;          /* Remove default margins */
+    padding: 0;         /* Remove default padding */
+    box-sizing: border-box;  /* Include padding/border in element's total width/height */
+}
+
+/* CSS Variables (Custom Properties) */
+/* Define colors once, use everywhere */
+/* :root means these are available globally */
+:root {
+    --primary-color: #2c3e50;      /* Dark blue-gray */
+    --secondary-color: #3498db;     /* Bright blue */
+    --success-color: #27ae60;       /* Green */
+    --danger-color: #e74c3c;        /* Red */
+    --warning-color: #f39c12;       /* Orange */
+    --light-gray: #ecf0f1;          /* Light gray */
+    --dark-gray: #34495e;           /* Dark gray */
+    --white: #ffffff;               /* White */
+}
+
+/* Base body styles */
+body {
+    /* Font stack - if first font isn't available, use the next */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    line-height: 1.6;               /* Space between lines of text */
+    color: var(--dark-gray);        /* Default text color */
+    background-color: #f5f7fa;      /* Light background */
+}
+
+/* Container for centering content */
+.container {
+    max-width: 1200px;              /* Maximum width */
+    margin: 0 auto;                 /* Center horizontally */
+    padding: 0 20px;                /* Add space on sides */
+}
+
+/* ============================================ */
+/* HEADER STYLES */
+/* ============================================ */
+
+.header {
+    /* Gradient background from primary to secondary color */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 2rem 0;                /* rem = relative to root font size */
+    
+    /* Box shadow: horizontal-offset vertical-offset blur-radius color */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;              /* Large heading */
+    margin-bottom: 0.5rem;          /* Space below */
+}
+
+.header p {
+    font-size: 1.1rem;              /* Slightly larger than normal */
+    opacity: 0.9;                   /* Slightly transparent */
+}
+
+/* ============================================ */
+/* STATISTICS SECTION */
+/* ============================================ */
+
+.stats-section {
+    padding: 2rem 0;                /* Vertical padding */
+}
+
+.stats-grid {
+    /* CSS Grid - creates responsive grid layout */
+    display: grid;
+    
+    /* Create columns that auto-fit and are at least 200px wide */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    
+    gap: 1.5rem;                    /* Space between grid items */
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;            /* Rounded corners */
+    text-align: center;             /* Center all text */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    
+    /* Transition for smooth hover effect */
+    transition: transform 0.3s ease;
+}
+
+/* When hovering over stat card */
+.stat-card:hover {
+    /* Move card up slightly */
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2rem;                /* Large icon */
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+/* ============================================ */
+/* MAIN CONTENT */
+/* ============================================ */
+
+.main-content {
+    padding: 2rem 0;
+}
+
+/* ============================================ */
+/* FORM STYLES */
+/* ============================================ */
+
+.add-book-section {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.book-form {
+    margin-top: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    
+    /* Responsive columns - minimum 250px, maximum 1fr (fraction of available space) */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    /* Flexbox for vertical layout */
+    display: flex;
+    flex-direction: column;         /* Stack label above input */
+}
+
+/* Make some form fields span full width */
+.form-group.full-width {
+    grid-column: 1 / -1;            /* Span from first to last column */
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;               /* Medium bold */
+    color: var(--dark-gray);
+}
+
+/* Style all form inputs */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    
+    /* Smooth transition for focus effect */
+    transition: border-color 0.3s ease;
+}
+
+/* When input is focused (clicked on) */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;                  /* Remove default outline */
+    border-color: var(--secondary-color);  /* Change border color */
+}
+
+/* ============================================ */
+/* BUTTON STYLES */
+/* ============================================ */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;                /* Show hand cursor on hover */
+    
+    /* Smooth transition for all properties */
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;      /* Darker blue */
+    transform: translateY(-2px);    /* Slight lift effect */
+}
+
+.btn-edit {
+    background-color: var(--warning-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+    opacity: 0.9;                   /* Slightly transparent */
+    transform: translateY(-2px);
+}
+
+/* ============================================ */
+/* SEARCH SECTION */
+/* ============================================ */
+
+.search-section {
+    display: flex;                  /* Flexbox for horizontal layout */
+    gap: 1rem;                      /* Space between items */
+    margin-bottom: 2rem;
+}
+
+#searchInput {
+    flex: 1;                        /* Take up remaining space */
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#filterStatus {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-width: 150px;               /* Minimum width */
+}
+
+/* ============================================ */
+/* BOOKS DISPLAY SECTION */
+/* ============================================ */
+
+.books-section {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.books-grid {
+    display: grid;
+    
+    /* auto-fill creates as many columns as fit */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.book-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    
+    /* Left border for visual accent */
+    border-left: 4px solid var(--secondary-color);
+    
+    transition: all 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateX(5px);     /* Slide right on hover */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.book-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.book-card .author {
+    color: var(--dark-gray);
+    font-style: italic;             /* Italic text */
+    margin-bottom: 0.5rem;
+}
+
+.book-card .metadata {
+    display: flex;
+    flex-wrap: wrap;                /* Allow items to wrap to next line */
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.book-card .metadata span {
+    display: flex;
+    align-items: center;            /* Vertically center icon with text */
+    gap: 0.3rem;
+}
+
+/* Status badges with different colors */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;            /* Pill shape */
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-read {
+    background-color: #d4edda;      /* Light green */
+    color: #155724;                 /* Dark green */
+}
+
+.status-reading {
+    background-color: #fff3cd;      /* Light yellow */
+    color: #856404;                 /* Dark yellow */
+}
+
+.status-to-read {
+    background-color: #d1ecf1;      /* Light blue */
+    color: #0c5460;                 /* Dark blue */
+}
+
+.rating {
+    color: var(--warning-color);    /* Orange for stars */
+}
+
+.book-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ============================================ */
+/* MODAL (POPUP) STYLES */
+/* ============================================ */
+
+.modal {
+    display: none;                  /* Hidden by default */
+    position: fixed;                /* Stay in place */
+    z-index: 1000;                  /* On top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;                    /* Full width */
+    height: 100%;                   /* Full height */
+    
+    /* Semi-transparent black background */
+    background-color: rgba(0,0,0,0.5);
+    
+    /* Fade in animation */
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animation for modal fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }            /* Start invisible */
+    to { opacity: 1; }              /* End fully visible */
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 5% auto;                /* Center vertically with margin */
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    
+    /* Slide down animation */
+    animation: slideDown 0.3s ease;
+}
+
+/* Animation for modal sliding down */
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);  /* Start 50px above */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);      /* End at normal position */
+        opacity: 1;
+    }
+}
+
+/* Close button (X) */
+.close {
+    color: #aaa;
+    float: right;                   /* Position to the right */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--dark-gray);
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN */
+/* ============================================ */
+
+/* For screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;            /* Smaller heading on mobile */
+    }
+    
+    .stats-grid {
+        /* 2 columns on mobile instead of 4 */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-grid {
+        /* Single column on mobile */
+        grid-template-columns: 1fr;
+    }
+    
+    .books-grid {
+        /* Single column on mobile */
+        grid-template-columns: 1fr;
+    }
+    
+    .search-section {
+        /* Stack search and filter vertically */
+        flex-direction: column;
+    }
+}
+
+/* ============================================ */
+/* LOADING SPINNER */
+/* ============================================ */
+
+.loading {
+    display: flex;
+    justify-content: center;        /* Center horizontally */
+    align-items: center;            /* Center vertically */
+    min-height: 200px;
+}
+
+.spinner {
+    border: 3px solid var(--light-gray);
+    border-top: 3px solid var(--secondary-color);
+    border-radius: 50%;            /* Make it circular */
+    width: 40px;
+    height: 40px;
+    
+    /* Spinning animation */
+    animation: spin 1s linear infinite;
+}
+
+/* Spinning animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================ */
+/* EMPTY STATE */
+/* ============================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--dark-gray);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--light-gray);
+    margin-bottom: 1rem;
+}
